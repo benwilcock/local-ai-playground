@@ -1,0 +1,45 @@
+GET http://localhost:8080/models
+
+
+###
+POST http://localhost:8080/v1/chat/completions 
+content-Type: application/json
+
+{
+     "model": "ggml-gpt4all-j",
+     "messages": [
+          {
+               "role": "user", 
+               "content": "In the context of programming, what is Java and why would you use it?"
+               }
+          ],
+     "temperature": 0.9
+}
+
+###
+
+POST http://localhost:8080/models/apply HTTP/1.1
+content-type: application/json
+
+{         
+     "url": "github:go-skynet/model-gallery/stablediffusion.yaml"
+}
+
+###
+POST http://localhost:8080/v1/images/generations HTTP/1.1
+content-type: application/json
+
+{
+     "prompt": "A cute baby sea otter",
+     "size": "256x256" 
+}
+
+###
+POST http://localhost:8080/v1/images/generations HTTP/1.1
+content-type: application/json
+
+{
+     "prompt": "floating hair, portrait, ((loli)), ((one girl)), cute face, hidden hands, asymmetrical bangs, beautiful detailed eyes, eye shadow, hair ornament, ribbons, bowties, buttons, pleated skirt, (((masterpiece))), ((best quality)), colorful|((part of the head)), ((((mutated hands and fingers)))), deformed, blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, Octane renderer, lowres, bad anatomy, bad hands, text",
+     "mode": 2,  "seed":9000,
+     "size": "256x256", "n":2
+}

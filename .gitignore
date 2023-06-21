@@ -1,0 +1,16 @@
+# Ignore models
+
+models/**
+!models/keep
+
+tmp/**
+!tmp/keep
+
+release/
+
+# just in case
+.DS_Store
+.idea
+
+# Generated during build
+backend-assets/

@@ -1,0 +1,59 @@
+version: '3.6'
+
+## See also .env file for additional settings
+name: local-ai-chatbot
+
+services:
+
+  ## OpenAI compatible API server capable of using several AI models
+  ## including gpt4app-j (chat), stable diffusion (images), and whisper (audio)
+  api:
+    container_name: api
+    image: quay.io/go-skynet/local-ai:v1.18.0
+    # As initially LocalAI will download the models defined in PRELOAD_MODELS
+    # you might need to tweak the healthcheck values here according to your network connection.
+    # Here we give a timespan of 20m to download all the required files.
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
+      interval: 1m
+      timeout: 20m
+      retries: 20
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080 # Rest API will be on this port
+    environment:
+      - 'THREADS=8'
+      - 'CONTEXT_SIZE=1024'
+      - 'DEBUG=true'
+      - 'REBUILD=true'
+      - 'GO_TAGS=stablediffusion'
+      - 'MODELS_PATH=/models'
+      - 'IMAGE_PATH=/tmp'
+      # You can preload (auto-download) different models. See: https://github.com/go-skynet/model-gallery
+      - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}, {"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
+    volumes:
+      - ./models:/models:cached
+      - ./tmp:/tmp
+    command: ["/usr/bin/local-ai" ]
+
+  ## Chat GPT Like Frontend ######################
+  chatgpt:
+    container_name: chatgpt
+    depends_on:
+      api:
+        condition: service_healthy # Wats for healthcheck to pass before starting
+    image: ghcr.io/mckaywrigley/chatbot-ui:main
+    ports:
+      - 3000:3000 # GUI will be on this port 
+    environment:
+      - 'OPENAI_API_KEY=sk-XXXXXXXXXXXXXXXXXXXX'
+      - 'OPENAI_API_HOST=http://api:8080' # Links to API container above
+      - 'DEFAULT_MODEL=ggml-gpt4all-j' # Specify the default model to use
+
+  ## Alternate (Simple) Frontend ######################
+  # frontend:
+  #   image: quay.io/go-skynet/localai-frontend:master
+  #   ports:
+  #     - 3001:3000
