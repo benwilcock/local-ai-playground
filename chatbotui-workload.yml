@@ -1,0 +1,26 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+  name: chatbot-ui
+  namespace: polyglot-demo
+spec:
+  env:
+    - name: OPENAI_API_KEY
+      value: "sk-XXXXXXXXXXXXXXXXXXXX"
+    - name: OPENAI_API_HOST
+      value: "http://local-ai:8080"
+    - name: DEFAULT_MODEL
+      value: "ggml-gpt4all-j"
+  params:
+    - name: dockerfile
+      value: ./Dockerfile
+  source:
+    git:
+      ref:
+        branch: main
+      url: https://github.com/mckaywrigley/chatbot-ui
+status:
+  supplyChainRef: {}

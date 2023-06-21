@@ -1,0 +1,37 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+  name: local-ai
+  namespace: polyglot-demo
+spec:
+  env:
+    - name: DEBUG
+      value: "true"
+    - name: THREADS
+      value: "8"
+    - name: CONTEXT_SIZE
+      value: "1024"
+    - name: REBUILD
+      value: "true"
+    - name: GO_TAGS
+      value: "stablediffusion"
+    - name: MODELS_PATH
+      value: "/models"
+    - name: IMAGE_PATH
+      value: "/tmp"
+    - name: PRELOAD_MODELS
+      value: '[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}, {"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
+  params:
+    - name: dockerfile
+      value: ./Dockerfile
+  source:
+    git:
+      ref:
+        branch: master
+        tag: v1.18.0
+      url: https://github.com/go-skynet/LocalAI
+status:
+  supplyChainRef: {}
