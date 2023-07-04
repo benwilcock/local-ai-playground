@@ -26,8 +26,7 @@ This download method also creates a prompt template and allows for the model to 
 
 See [`sample.env`](../sample.env) or [`docker-compose.yaml`](../docker-compose.yaml). 
 
-> Note: I couldn't get a full list of models as currently present in the official model gallery to work correctly. Only a few models were listed. Instead I used the HuggingFace unofficial gallery.
-
+> Note: Only a few models were listed in the official gallery [index.yaml](https://github.com/go-skynet/model-gallery/blob/main/index.yaml). Instead I used the HuggingFace unofficial gallery.
 
 # HuggingFace Gallery Models To Try:
 
