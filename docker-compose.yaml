@@ -4,7 +4,6 @@ version: '3.6'
 name: local-ai-chatbot
 
 services:
-
   ## OpenAI compatible API server capable of using several AI models
   ## including gpt4app-j (chat), stable diffusion (images), and whisper (audio)
   api:
@@ -22,35 +21,37 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080 # Rest API will be on this port
+      - 8080:8080 # Rest API will be on this port (outside:inside)
     environment:
-      - 'THREADS=8'
-      - 'CONTEXT_SIZE=1024'
-      - 'DEBUG=true'
-      - 'REBUILD=true'
-      - 'GO_TAGS=stablediffusion'
-      - 'MODELS_PATH=/models'
-      - 'IMAGE_PATH=/tmp'
+      - 'THREADS=4' # Set this to the number of physical CPU's not threads
+      - 'CONTEXT_SIZE=1024' # The historic memory for conversations
+      - 'MODELS_PATH=/models' # Location of the models folder in the image
+      - 'DEBUG=true' # More info for builds and output when tailing logs
+      # - 'REBUILD=true' # Required for Stable Diffusion mode
+      # - 'GO_TAGS=stablediffusion' # Required for Stable Diffusion mode
+      # - 'IMAGE_PATH=/tmp' # Required for Stable Diffusion mode
       # You can preload (auto-download) different models. See: https://github.com/go-skynet/model-gallery
-      - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}, {"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
+      # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
+      # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}, {"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
     volumes:
-      - ./models:/models:cached
-      - ./tmp:/tmp
+      - ./models:/models:cached # Maps the model folder to this project's models folder
+      - ./tmp:/tmp # Required for Stable Diffusion mode
     command: ["/usr/bin/local-ai" ]
 
-  ## Chat GPT Like Frontend ######################
-  chatgpt:
-    container_name: chatgpt
-    depends_on:
-      api:
-        condition: service_healthy # Wats for healthcheck to pass before starting
-    image: ghcr.io/mckaywrigley/chatbot-ui:main
-    ports:
-      - 3000:3000 # GUI will be on this port 
-    environment:
-      - 'OPENAI_API_KEY=sk-XXXXXXXXXXXXXXXXXXXX'
-      - 'OPENAI_API_HOST=http://api:8080' # Links to API container above
-      - 'DEFAULT_MODEL=ggml-gpt4all-j' # Specify the default model to use
+  ## ChatBot UI - ChatGPT Like Frontend ######################
+  # chatgpt:
+  #   container_name: chatgpt
+  #   depends_on:
+  #     api:
+  #       condition: service_healthy # Waits for healthcheck to pass before starting
+  #   image: ghcr.io/mckaywrigley/chatbot-ui:main
+  #   ports:
+  #     - 3000:3000 # ChatBot UI will be on this port (outside:inside)
+  #   environment:
+  #     - 'OPENAI_API_KEY=sk-XXXXXXXXXXXXXXXXXXXX'
+  #     - 'OPENAI_API_HOST=http://api:8080' # Links to API container above
+  #     - 'DEFAULT_MODEL=open-llama-7B-open-instruct' # Specify the default model to use
+#      - 'DEFAULT_MODEL=ggml-gpt4all-j' # Specify the default model to use
 
   ## Alternate (Simple) Frontend ######################
   # frontend:

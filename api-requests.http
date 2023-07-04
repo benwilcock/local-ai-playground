@@ -6,6 +6,36 @@ POST http://localhost:8080/v1/chat/completions
 content-Type: application/json
 
 {
+     "model": "open-llama-7B-open-instruct",
+     "messages": [
+          {
+               "role": "user", 
+               "content": "In the context of programming, what is Java and why would you use it?"
+               }
+          ],
+     "temperature": 0.9
+}
+
+###
+POST http://localhost:8080/v1/chat/completions 
+content-Type: application/json
+
+{
+     "model": "open-llama-7B-open-instruct",
+     "messages": [
+          {
+               "role": "user", 
+               "content": "Can you show me how to write a Java class that represents a Person? Respond with code and check for yourself that the class is correctly formed before you respond."
+               }
+          ],
+     "temperature": 0.9
+}
+
+###
+POST http://localhost:8080/v1/chat/completions 
+content-Type: application/json
+
+{
      "model": "ggml-gpt4all-j",
      "messages": [
           {

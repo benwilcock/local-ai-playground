@@ -2,6 +2,9 @@
 
 models/**
 !models/keep
+!models/*.yaml
+!models/*.tmpl
+!models/*.old
 
 tmp/**
 !tmp/keep
