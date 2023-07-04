@@ -8,7 +8,7 @@ services:
   ## including gpt4app-j (chat), stable diffusion (images), and whisper (audio)
   local-ai-api:
     container_name: local-ai-api
-    image: quay.io/go-skynet/local-ai:latest # was: quay.io/go-skynet/local-ai:v1.18.0
+    image: quay.io/go-skynet/local-ai:v1.20.0-ffmpeg # was: quay.io/go-skynet/local-ai:v1.18.0
     # As initially LocalAI will download the models defined in PRELOAD_MODELS
     # you might need to tweak the healthcheck values here according to your network connection.
     # Here we give a timespan of 20m to download all the required files.
@@ -28,15 +28,17 @@ services:
       - 'MODELS_PATH=/models' # Location of the models folder in the image
       - 'DEBUG=true' # More info for builds and output when tailing logs
       - 'GALLERIES=[{"name":"model-gallery", "url":"github:go-skynet/model-gallery/index.yaml"},{"url": "github:ci-robbot/localai-huggingface-zoo/index.yaml","name":"huggingface"}]'
-      # - 'REBUILD=true' # Required for Stable Diffusion mode
-      # - 'GO_TAGS=stablediffusion' # Required for Stable Diffusion mode
-      # - 'IMAGE_PATH=/tmp' # Required for Stable Diffusion mode
+      - 'REBUILD=true' # Required for Stable Diffusion mode
+      - 'GO_TAGS=stablediffusion' # Required for Stable Diffusion mode
+      - 'IMAGE_PATH=/tmp' # Required for Stable Diffusion mode
+      - 'UPLOAD_LIMIT=1000' # used by Whisper mode to stop massive uploads
       # You can preload (auto-download) different models. See: https://github.com/go-skynet/model-gallery
       # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
       # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}, {"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
     volumes:
       - ./models:/models:cached # Maps the model folder to this project's models folder
       - ./tmp:/tmp # Required for Stable Diffusion mode
+      - ./audio:/audio # Required for Whisper
     command: ["/usr/bin/local-ai" ]
 
   # ChatBot UI - ChatGPT Like Frontend ######################
@@ -51,11 +53,7 @@ services:
     environment:
       - 'OPENAI_API_KEY=sk-XXXXXXXXXXXXXXXXXXXX'
       - 'OPENAI_API_HOST=http://local-ai-api:8080' # The LocalAI API endpoint
-    #   - 'DEFAULT_MODEL=open-llama-7B-open-instruct' # Specify the default model to use
-    #  - 'DEFAULT_MODEL=ggml-gpt4all-j' # Specify the default model to use
+    # - 'NEXT_PUBLIC_DEFAULT_SYSTEM_PROMPT=### Instruction: {{.input}} ### Response:'
+    # - 'NEXT_PUBLIC_DEFAULT_TEMPERATURE=0.8'
+    # - 'DEFAULT_MODEL=gpt-3.5-turbo' # Specify the default model to use ("gpt-3.5-turbo" is default)
 
-  ## Alternate (Simple) Frontend ######################
-  # frontend:
-  #   image: quay.io/go-skynet/localai-frontend:master
-  #   ports:
-  #     - 3001:3000

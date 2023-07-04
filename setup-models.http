@@ -16,3 +16,21 @@ content-type: application/json
      "name": "gpt-3.5-turbo"
 }
 
+###
+# Download the StableDiffusion image generation model
+POST http://localhost:8080/models/apply HTTP/1.1
+content-type: application/json
+
+{         
+     "id": "model-gallery@stablediffusion"
+}
+
+###
+# Download the Whisper speech to text model
+POST http://localhost:8080/models/apply HTTP/1.1
+content-type: application/json
+
+{         
+     "id": "model-gallery@whisper-1"
+}
+

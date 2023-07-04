@@ -11,6 +11,10 @@ models/**
 tmp/**
 !tmp/keep
 
+## Ignore audio
+audio/**
+!audio/.keep
+
 release/
 
 # just in case

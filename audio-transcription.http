@@ -1,0 +1,33 @@
+###
+# See which models are in the /models folder
+GET http://localhost:8080/models
+
+###
+# Transcribe an audio file into text
+POST http://localhost:8080/v1/audio/transcriptions HTTP/1.1
+Content-Type: multipart/form-data; boundary=MfnBoundry
+
+--MfnBoundry
+Content-Disposition: form-data; name="model"
+
+whisper-1
+--MfnBoundry
+Content-Disposition: form-data; name="language"
+
+en
+--MfnBoundry
+Content-Disposition: form-data; name="response_format"
+
+text
+--MfnBoundry
+Content-Disposition: form-data; name="size"
+
+small
+--MfnBoundry
+Content-Disposition: form-data; name="file"; filename="transcript.wav"
+Content-Type: audio/wav
+
+< ./audio/transcript.wav
+--MfnBoundry--
+
+#curl http://localhost:8080/v1/audio/transcriptions -H "Content-Type: multipart/form-data" -F file="@$PWD/audio/gb1.ogg" -F model="whisper-1"   
