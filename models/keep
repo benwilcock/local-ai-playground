@@ -1,8 +1,0 @@
-This folder is where your models will be saved.
-
-Models to try:
-
-https://huggingface.co/TheBloke/open-llama-7b-open-instruct-GGML
-
-Downloaded "open-llama-7B-open-instruct.ggmlv3.q8_0.bin" and rename it to "open-llama-7B-open-instruct". Set this as the default model for ChatBotUI in the `docker-compose.yaml`.
-

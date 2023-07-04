@@ -2,6 +2,10 @@
 
 Repo for storing my work on Local AI solutions
 
+## UPDATE: 2023-07-04
+
+Updated to the latest version of LocalAI and added the parts necessary to enable automatic download of models from HuggingFace and the Model Gallery. 
+
 ## My Notes.
 
 This project relies heavily on Docker and Docker Compose. It's best to have at least 16GB of RAM and a Intel 11 Gen CPU (or better). No GPU is required.
@@ -28,7 +32,7 @@ This will pull down two docker images (one for LocalAI and one for the the ChatB
 This process can take a long time if you're starting the servers for the first time. LocalAI will need to download some AI models (which are quite big). Tail the logs on the LocalAI image (names `api`) to monitor progress and wait for the system to fully come up. This can take several minutes.
 
 ```bash
-docker logs -f --tail 1000 api
+docker logs -f --tail 1000 local-ai-api
 ```
 
 Once the system has finished initializing, you'll see the following message in the log:
@@ -44,20 +48,20 @@ Once the system has finished initializing, you'll see the following message in t
  └───────────────────────────────────────────────────┘ 
 ```
 
-> The [`.env`](.env) file contains the ENVIRONMENT variables used by the [`docker compose`](docker-compose.yaml) command to bring up the containers. 
+> The [`sample.env`](.env) file contains the ENVIRONMENT variables used by the [`docker compose`](docker-compose.yaml) command to bring up the containers. 
 
-Assuming the ChatBot-UI has also started (check with `docker ps`), you are now free to start using the application. Point your browser to [http://localhost:3000](http://localhost:3000).
+Assuming the ChatBot-UI has also started (check with `docker ps`), you are now free to start using the application. Point your browser to [http://localhost:3001](http://localhost:3001).
 
 You can then start using the ChatBot-UI to communicate with the model. Be patient. The model's responses can take a while - depending on many factors including the model itself, the CPU?RAM horsepower available etc. It can also be quite inaccurate sometimes, depending on the question prompt and the context.
 
 ### Downloading Models
 
-Local AI is capable of downloading certain models on startup. This can also take a very long time. See the `docker-compose.yml` file for an example. A good default is to use GPT4All-j. This is the model that this project will attenpt to download for you.
+See [The Models README](./models/README.md) for more details.
 
 ### Using Chat
 
-Open your bowser and navigate to [http://localhost:3000](http://localhost:3000). Here you will find [ChatBot UI](https://github.com/mckaywrigley/chatbot-ui)
+Open your bowser and navigate to [http://localhost:3001](http://localhost:3001). Here you will find [ChatBot UI](https://github.com/mckaywrigley/chatbot-ui)
 
-### Generating Artwork
+### Calling The REST API Directly
 
 The file `api-requests.http` can be used with the VS Code extension "REST Client" to send REST calls to the LocalAI backend. This is useful for working with models like Stable Diffusion where images are created rather than chats.  

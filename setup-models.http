@@ -1,0 +1,18 @@
+###
+# Show a list of what's in the /models folder.
+GET http://localhost:8080/models
+
+###
+# Get a list of all the models that are available from the registered galleries
+GET http://localhost:8080/models/available
+
+###
+# Download the VMware Open LLaMa 7B Open Instruct (Q8) Model by TheBloke
+POST http://localhost:8080/models/apply HTTP/1.1
+content-type: application/json
+
+{         
+     "id": "huggingface@thebloke__open-llama-7b-open-instruct-ggml__open-llama-7b-open-instruct.ggmlv3.q8_0.bin",
+     "name": "gpt-3.5-turbo"
+}
+

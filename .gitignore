@@ -1,11 +1,13 @@
 # Ignore models
-
 models/**
-!models/keep
+
+# Except these files - they show some config info
+!models/*.md
 !models/*.yaml
 !models/*.tmpl
 !models/*.old
 
+# Ignore tmp
 tmp/**
 !tmp/keep
 
