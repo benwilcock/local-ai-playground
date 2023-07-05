@@ -8,7 +8,7 @@ services:
   ## including gpt4app-j (chat), stable diffusion (images), and whisper (audio)
   local-ai-api:
     container_name: local-ai-api
-    image: quay.io/go-skynet/local-ai:v1.20.0-ffmpeg # was: quay.io/go-skynet/local-ai:v1.18.0
+    image: quay.io/go-skynet/local-ai:v1.20.1 # was: quay.io/go-skynet/local-ai:v1.18.0
     # As initially LocalAI will download the models defined in PRELOAD_MODELS
     # you might need to tweak the healthcheck values here according to your network connection.
     # Here we give a timespan of 20m to download all the required files.
@@ -28,10 +28,10 @@ services:
       - 'MODELS_PATH=/models' # Location of the models folder in the image
       - 'DEBUG=true' # More info for builds and output when tailing logs
       - 'GALLERIES=[{"name":"model-gallery", "url":"github:go-skynet/model-gallery/index.yaml"},{"url": "github:ci-robbot/localai-huggingface-zoo/index.yaml","name":"huggingface"}]'
-      - 'REBUILD=true' # Required for Stable Diffusion mode
-      - 'GO_TAGS=stablediffusion' # Required for Stable Diffusion mode
+      #- 'REBUILD=true' # Required for Stable Diffusion mode
+      #- 'GO_TAGS=stablediffusion' # Required for Stable Diffusion mode
       - 'IMAGE_PATH=/tmp' # Required for Stable Diffusion mode
-      - 'UPLOAD_LIMIT=1000' # used by Whisper mode to stop massive uploads
+      #- 'UPLOAD_LIMIT=100' # used by Whisper mode to stop massive uploads
       # You can preload (auto-download) different models. See: https://github.com/go-skynet/model-gallery
       # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
       # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}, {"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
