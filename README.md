@@ -2,6 +2,10 @@
 
 Repo for storing my work on Local AI solutions
 
+## UPDATE: 2023-07-12
+
+Updated the [setup-models.http](./setup-models.http) to add the latest V2 Open LLAMA 7B V2 Open Instruct model as a model download target.
+
 ## UPDATE: 2023-07-04
 
 Updated to the latest version of LocalAI and added the parts necessary to enable automatic download of models from HuggingFace and the Model Gallery. 
@@ -50,9 +54,11 @@ Once the system has finished initializing, you'll see the following message in t
 
 > The [`sample.env`](.env) file contains the ENVIRONMENT variables used by the [`docker compose`](docker-compose.yaml) command to bring up the containers. 
 
+If you haven't done so already, you now need to download and configure a suitable large language model. See the [models README](./models/README.md) for detailed instructions.
+
 Assuming the ChatBot-UI has also started (check with `docker ps`), you are now free to start using the application. Point your browser to [http://localhost:3001](http://localhost:3001).
 
-You can then start using the ChatBot-UI to communicate with the model. Be patient. The model's responses can take a while - depending on many factors including the model itself, the CPU?RAM horsepower available etc. It can also be quite inaccurate sometimes, depending on the question prompt and the context.
+You can then start using the ChatBot-UI to communicate with the model. Be patient. The model's responses can take a while depending on many factors including the model size, the CPU speed, RAM available, SSD speed etc. It can also be quite inaccurate sometimes, depending on the question, the prompt, and the context.
 
 ### Downloading Models
 
