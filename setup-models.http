@@ -7,12 +7,22 @@ GET http://localhost:8080/models
 GET http://localhost:8080/models/available
 
 ###
-# Download the VMware Open LLaMa 7B Open Instruct (Q8) Model by TheBloke
+# Download the VMware Open LLaMa 7B Open Instruct (Q8) V1 Model by TheBloke
 POST http://localhost:8080/models/apply HTTP/1.1
 content-type: application/json
 
 {         
      "id": "huggingface@thebloke__open-llama-7b-open-instruct-ggml__open-llama-7b-open-instruct.ggmlv3.q8_0.bin",
+     "name": "gpt-3.5-turbo"
+}
+
+###
+# Download the VMware Open LLaMa 7B Open Instruct (Q8) V2 Model by TheBloke
+POST http://localhost:8080/models/apply HTTP/1.1
+content-type: application/json
+
+{
+     "id": "huggingface@thebloke__open-llama-7b-v2-open-instruct-ggml__open-llama-7b-v2-open-instruct.ggmlv3.q8_0.bin",
      "name": "gpt-3.5-turbo"
 }
 
