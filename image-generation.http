@@ -32,3 +32,29 @@ content-type: application/json
      "size": "512x512", "n":2
 }
 
+###
+POST http://localhost:8080/v1/images/generations HTTP/1.1
+content-type: application/json
+
+{
+     "prompt": "portrait photo of a asia old warrior chief, tribal panther make up, blue on red, side profile, looking away, serious eyes, 50mm portrait photography, hard rim lighting photography–beta",
+     "size": "512x512", "n":4
+}
+
+###
+POST http://localhost:8080/v1/images/generations HTTP/1.1
+content-type: application/json
+
+{
+     "prompt": "priest, blue robes, 68 year old man, national geographic, portrait, photo, photography",
+     "size": "512x512", "n":1
+}
+
+###
+POST http://localhost:8080/v1/images/generations HTTP/1.1
+content-type: application/json
+
+{
+     "prompt": "a cute magical flying dog, fantasy art drawn by disney concept artists, golden colour, high quality, highly detailed, elegant, sharp focus, concept art, character concepts, digital painting, mystery, adventure",
+     "size": "512x512", "n":1
+}
