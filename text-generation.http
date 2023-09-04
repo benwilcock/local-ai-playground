@@ -20,6 +20,23 @@ content-Type: application/json
 }
 
 ###
+
+POST https://mockgpt.wiremockapi.cloud/v1/chat/completions 
+content-Type: application/json
+
+{
+     "model": "gpt-3.5-turbo",
+     "apiKey": "sk-hknuewz5we7u8ez4mi78khgfc3ch4iq0",
+     "messages": [
+          {
+               "role": "user", 
+               "content": "Hello World!"
+               }
+          ],
+     "temperature": 0.9
+}
+
+###
 POST http://localhost:8080/v1/chat/completions 
 content-Type: application/json
 

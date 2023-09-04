@@ -1,10 +1,13 @@
-context_size: 1024
+backend: llama
+context_size: 4096
 name: gpt-3.5-turbo
 parameters:
-  model: llama-2-13b-chat.ggmlv3.q8_0.bin
+  model: codellama-13b-instruct.Q6_K.gguf
   temperature: 0.2
   top_k: 80
   top_p: 0.7
-template:
-  chat: chat
-  completion: completion
+system_prompt: |
+  You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+  If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
+# template:
+#   chat_message: llama2-chat-message

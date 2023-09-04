@@ -7,12 +7,12 @@ GET http://localhost:8080/models
 GET http://localhost:8080/models/available
 
 ###
-# Download the VMware Open LLaMa 7B Open Instruct (Q8) V1 Model by TheBloke
+# Download the codeup-llama-2-13b-chat-hf-ggml by TheBloke
 POST http://localhost:8080/models/apply HTTP/1.1
 content-type: application/json
 
 {         
-     "id": "huggingface@thebloke__open-llama-7b-open-instruct-ggml__open-llama-7b-open-instruct.ggmlv3.q8_0.bin",
+     "id": "huggingface@thebloke__codeup-llama-2-13b-chat-hf-ggml__codeup-llama-2-13b-chat-hf.ggmlv3.q3_k_m.bin",
      "name": "gpt-3.5-turbo"
 }
 
@@ -54,3 +54,32 @@ content-type: application/json
      "id": "model-gallery@whisper-1"
 }
 
+###
+# Download the Bert embeddings
+POST http://localhost:8080/models/apply HTTP/1.1
+content-type: application/json
+
+{         
+     "id": "model-gallery@bert-embeddings",
+     "name": "text-embedding-ada-002"
+}
+
+###
+# Download the Huggingface embeddings
+# POST http://localhost:8080/models/apply HTTP/1.1
+# content-type: application/json
+
+# {         
+#      "id": "model-gallery@huggingface-embeddings",
+#      "name": "text-embedding-ada-002"
+# }
+
+###
+# Test the Bert embeddings
+POST http://localhost:8080/v1/embeddings HTTP/1.1
+content-type: application/json
+
+{         
+     "input": "Test",
+     "model": "text-embedding-ada-002"
+}

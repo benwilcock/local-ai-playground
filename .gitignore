@@ -15,6 +15,14 @@ tmp/**
 audio/**
 !audio/.keep
 
+## Flowise
+flowise/**
+!flowise/.keep
+
+## Chroma
+chroma/**
+chroma_index/**
+
 release/
 
 # just in case
@@ -23,3 +31,4 @@ release/
 
 # Generated during build
 backend-assets/
+
