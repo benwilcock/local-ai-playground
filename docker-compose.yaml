@@ -59,29 +59,29 @@ services:
     ports:
       - 3001:3000 # ChatBot UI will be on this port (outside:inside)
 
-  flowise:
-    image: flowiseai/flowise:latest
-    container_name: flowise
-    restart: always
-    environment:
-        - PORT=3000
-        - FLOWISE_USERNAME=user
-        - FLOWISE_PASSWORD=password
-        # - PASSPHRASE=MYPASSPHRASE # Passphrase used to create encryption key
-        - DATABASE_PATH=/root/.flowise
-        - APIKEY_PATH=/root/.flowise
-        - SECRETKEY_PATH=/root/.flowise
-        - LOG_PATH=/root/.flowise/logs
-        - DEBUG=true
-        - LOG_LEVEL=debug
-    depends_on:
-      local-ai-api:
-        condition: service_healthy # Waits for healthcheck to pass before starting
-    ports:
-        - '3003:3000'
-    volumes:
-        - ./flowise:/root/.flowise
-    command: /bin/sh -c "sleep 3; flowise start"
+  # flowise:
+  #   image: flowiseai/flowise:latest
+  #   container_name: flowise
+  #   restart: always
+  #   environment:
+  #       - PORT=3000
+  #       - FLOWISE_USERNAME=user
+  #       - FLOWISE_PASSWORD=password
+  #       # - PASSPHRASE=MYPASSPHRASE # Passphrase used to create encryption key
+  #       - DATABASE_PATH=/root/.flowise
+  #       - APIKEY_PATH=/root/.flowise
+  #       - SECRETKEY_PATH=/root/.flowise
+  #       - LOG_PATH=/root/.flowise/logs
+  #       - DEBUG=true
+  #       - LOG_LEVEL=debug
+  #   depends_on:
+  #     local-ai-api:
+  #       condition: service_healthy # Waits for healthcheck to pass before starting
+  #   ports:
+  #       - '3003:3000'
+  #   volumes:
+  #       - ./flowise:/root/.flowise
+  #   command: /bin/sh -c "sleep 3; flowise start"
 
   # chroma: # https://github.com/chroma-core/chroma The OSS persistent embeddings database
   #   image: ghcr.io/chroma-core/chroma:latest
