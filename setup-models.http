@@ -7,12 +7,12 @@ GET http://localhost:8080/models
 GET http://localhost:8080/models/available
 
 ###
-# Download the codeup-llama-2-13b-chat-hf-ggml by TheBloke
+# Download the CodeLlama-7B-Instruct-GGUF model by TheBloke
 POST http://localhost:8080/models/apply HTTP/1.1
 content-type: application/json
 
 {         
-     "id": "huggingface@thebloke__codeup-llama-2-13b-chat-hf-ggml__codeup-llama-2-13b-chat-hf.ggmlv3.q3_k_m.bin",
+     "id": "model-gallery@codellama-7b-instruct-gguf",
      "name": "gpt-3.5-turbo"
 }
 
