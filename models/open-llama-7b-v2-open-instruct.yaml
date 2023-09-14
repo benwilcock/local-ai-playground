@@ -1,0 +1,10 @@
+context_size: 1024
+name: open-llama-7b-v2-open-instruct
+parameters:
+  model: open-llama-7b-v2-open-instruct.ggmlv3.q8_0.bin
+  temperature: 0.2
+  top_k: 80
+  top_p: 0.7
+template:
+  chat: open-llama-7b-v2-open-instruct-chat
+  completion: open-llama-7b-v2-open-instruct-completion

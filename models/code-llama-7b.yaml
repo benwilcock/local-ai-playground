@@ -1,0 +1,9 @@
+context_size: 4096
+name: code-llama-7b
+parameters:
+  model: codellama-7b-instruct.Q4_K_M.gguf
+  temperature: 0.2
+  top_k: 80
+  top_p: 0.7
+template:
+  chat_message: llama2-chat-message

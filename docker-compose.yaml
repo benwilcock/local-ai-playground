@@ -26,11 +26,15 @@ services:
       - 'MODELS_PATH=/models' # Location of the models folder in the image
       - 'DEBUG=true' # More info for builds and output when tailing logs
       - 'GALLERIES=[{"name":"model-gallery", "url":"github:go-skynet/model-gallery/index.yaml"}, {"name":"huggingface", "url": "github:go-skynet/model-gallery/huggingface.yaml"}]'
-      #- 'REBUILD=true' # Required for Stable Diffusion mode
+      # - 'REBUILD=true' # Required for Stable Diffusion mode
       # - 'GO_TAGS=stablediffusion' # Required for Stable Diffusion mode
       # - 'IMAGE_PATH=/tmp' # Required for Stable Diffusion mode
       # - 'UPLOAD_LIMIT=100' # used by Whisper mode to stop massive uploads
       # You can preload (auto-download) different models. See: https://github.com/go-skynet/model-gallery
+      - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/codellama-7b-instruct.yaml", "name": "code-llama-7b"}, {"url": "github:go-skynet/model-gallery/gpt4all-j-groovy.yaml", "name": "gpt-4-all-j-groovy"}]'
+      # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/llama2-chat.yaml", "name": "llama2-chat"}]'
+      # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/codellama-7b-instruct.yaml", "name": "code-llama"}]'
+      # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-4-all-j"}]'
       # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
       # - 'PRELOAD_MODELS=[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}, {"url": "github:go-skynet/model-gallery/stablediffusion.yaml"}]'
     volumes:

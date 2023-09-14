@@ -7,32 +7,12 @@ GET http://localhost:8080/models
 GET http://localhost:8080/models/available
 
 ###
-# Download the CodeLlama-7B-Instruct-GGUF model by TheBloke
-POST http://localhost:8080/models/apply HTTP/1.1
-content-type: application/json
-
-{         
-     "id": "model-gallery@codellama-7b-instruct-gguf",
-     "name": "gpt-3.5-turbo"
-}
-
-###
 # Download the VMware Open LLaMa 7B Open Instruct (Q8) V2 Model by TheBloke
 POST http://localhost:8080/models/apply HTTP/1.1
 content-type: application/json
 
 {
      "id": "huggingface@thebloke__open-llama-7b-v2-open-instruct-ggml__open-llama-7b-v2-open-instruct.ggmlv3.q8_0.bin",
-     "name": "gpt-3.5-turbo"
-}
-
-###
-# Download the Meta Llama 2 13B GGML Q8 Model by TheBloke (Llama-2-13B-chat-GGML)
-POST http://localhost:8080/models/apply HTTP/1.1
-content-type: application/json
-
-{
-     "id": "huggingface@thebloke__llama-2-13b-chat-ggml__llama-2-13b-chat.ggmlv3.q8_0.bin",
      "name": "gpt-3.5-turbo"
 }
 
