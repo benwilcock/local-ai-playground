@@ -18,6 +18,7 @@ content-type: application/json
 
 ###
 # Download the StableDiffusion image generation model
+# ONLY WORKS BECAUSE MODEL IS IN THE GALLERY INDEX
 POST http://localhost:8080/models/apply HTTP/1.1
 content-type: application/json
 
